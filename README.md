@@ -10,8 +10,8 @@
 #### 📥 Installation
 ```sh
 # Cloner le repo
-git clone https://github.com/ton-repo.git
-cd frontend
+git clone git@github.com:Alexhian/portfolio-front.git
+cd client
 
 # Installer les dépendances
 npm install
