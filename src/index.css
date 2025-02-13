@@ -11,3 +11,8 @@ main {
   font-family: "Roboto Condensed", sans-serif;
   color: var(--text-primary);
 }
+
+#title {
+  font-family: "Chakra Petch", sans-serif;
+}
+
