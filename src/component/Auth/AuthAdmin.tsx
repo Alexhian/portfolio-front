@@ -16,7 +16,7 @@ export default function AuthAdmin() {
 //   const { user } = useAuth();
 
 //   if (user?.role !== "admin") {
-//     return <Navigate to={"/user/home"} replace />;
+//     return <Navigate to={"/"} replace />;
 //   }
 
 //   return (

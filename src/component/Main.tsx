@@ -81,7 +81,7 @@ function Main() {
 				<img
 					src={profilePicture}
 					alt="Profile"
-					className="w-80 rounded-3xl shadow-lg"
+					className="w-90 rounded-full shadow-lg"
 				/>
 				<span className="grid place-items-center space-y-20">
 					<h1 id="title" className="text-6xl text-gray-200">
