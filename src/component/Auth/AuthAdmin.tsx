@@ -1,27 +1,17 @@
-import { Outlet } from "react-router-dom";
+import type { JSX } from "react";
+import { useMemo } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
-export default function AuthAdmin() {
-	return (
-		<div>
-			<Outlet />
-		</div>
+const AuthUser = (): JSX.Element => {
+	const { user } = useAuth();
+
+	const isAuthenticated = useMemo(
+		() => user && ["admin", "user"].includes(user.role),
+		[user],
 	);
-}
 
-// import { Navigate, Outlet } from "react-router-dom";
+	return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
+};
 
-// import { useAuth } from "../../contexts/AuthContext";
-
-// export const AuthAdmin = () => {
-//   const { user } = useAuth();
-
-//   if (user?.role !== "admin") {
-//     return <Navigate to={"/"} replace />;
-//   }
-
-//   return (
-//     <>
-//       <Outlet />
-//     </>
-//   );
-// };
+export default AuthUser;

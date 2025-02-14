@@ -1,7 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AuthAdmin from "./component/Auth/AuthAdmin";
+import AuthAdmin from "./component/auth/AuthAdmin";
+import { AuthProvider } from "./component/context/AuthContext";
 import "./index.css";
 import Admin from "./pages/Admin";
 import Home from "./pages/Home";
@@ -32,7 +33,9 @@ const rootElement = document.getElementById("root");
 if (rootElement) {
 	createRoot(rootElement).render(
 		<StrictMode>
-			<RouterProvider router={router} />
+			<AuthProvider>
+				<RouterProvider router={router} />
+			</AuthProvider>
 		</StrictMode>,
 	);
 }
