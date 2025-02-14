@@ -1,7 +1,75 @@
-export default function Login() {
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+
+function Login() {
+	const [login, setLogin] = useState({
+		email: "",
+		password: "",
+	});
+
+	const { setUser } = useAuth();
+
+	const navigate = useNavigate();
+
+	const handleInputsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+
+		setLogin((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
+
+	const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		const result = await axios.post(
+			`${import.meta.env.VITE_API_URL}/projects/auth/login`,
+			login,
+			{ withCredentials: true },
+		);
+
+		const currentUser = await axios.get(
+			`${import.meta.env.VITE_API_URL}/projects/auth/find/${result.data.userId}`,
+			{ withCredentials: true },
+		);
+
+		setUser(currentUser.data);
+
+		navigate("/admin/dashboard");
+	};
+
 	return (
-		<div className="flex items-center justify-center text-xl text-text-primary">
-			🚧 Work in Progress ... 🚧
+		<div id="login-container">
+			<h1>Login</h1>
+
+			<form onSubmit={handleFormSubmit}>
+				<input
+					id="email"
+					name="email"
+					type="email"
+					placeholder="email"
+					value={login.email}
+					onChange={handleInputsChange}
+					required
+				/>
+
+				<input
+					id="password"
+					name="password"
+					type="password"
+					placeholder="password"
+					required
+					value={login.password}
+					onChange={handleInputsChange}
+				/>
+
+				<button type="submit">Connexion</button>
+			</form>
 		</div>
 	);
 }
+
+export default Login;

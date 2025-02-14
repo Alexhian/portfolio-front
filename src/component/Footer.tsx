@@ -1,7 +1,6 @@
 import { IoMdMail } from "react-icons/io";
 
-import { FaGithub } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 function Footer() {
 	return (

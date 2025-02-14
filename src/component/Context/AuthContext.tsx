@@ -1,34 +1,35 @@
-// import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useCallback, useMemo, useState } from "react";
 
-// type AuthContextType = {
-// 	user: User | null;
-// 	setUser: React.Dispatch<React.SetStateAction<User | null>>;
-// };
+type AuthContextType = {
+	user: User | null;
+	setUser: React.Dispatch<React.SetStateAction<User | null>>;
+	logOut: () => void;
+};
 
-// type AuthProviderProps = {
-// 	children: React.ReactNode;
-// };
+type AuthProviderProps = {
+	children: React.ReactNode;
+};
 
-// type User = {
-// 	id: number;
-// 	username: string;
-// 	path: string;
-// 	role: string;
-// };
+type User = {
+	id: number;
+	username: string;
+	email: string;
+	role: "admin" | "user";
+	profilePicture: string;
+};
 
-// const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// export const AuthProvider = ({ children }: AuthProviderProps) => {
-// 	const [user, setUser] = useState<User | null>(null);
-// 	const value = useMemo(() => ({ user, setUser }), [user]);
+export const AuthProvider = ({ children }: AuthProviderProps) => {
+	const [user, setUser] = useState<User | null>(null);
 
-// 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-// };
+	const logOut = useCallback(() => {
+		setUser(null);
+	}, []);
 
-// export const useAuth = () => {
-// 	const context = useContext(AuthContext);
-// 	if (!context) {
-// 		throw new Error("useAuth must be used within an AuthProvider");
-// 	}
-// 	return context;
-// };
+	const value = useMemo(() => ({ user, setUser, logOut }), [user, logOut]);
+
+	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
+export default AuthContext;

@@ -8,7 +8,7 @@ function Header() {
 					<li>
 						<Link
 							className="text-gray-200 text-xl hover:text-emerald-500 cursor-pointer"
-						to="#about"
+							to="#about"
 						>
 							À propos
 						</Link>
@@ -16,7 +16,7 @@ function Header() {
 					<li>
 						<Link
 							className="text-gray-200 text-xl hover:text-emerald-500 cursor-pointer"
-						to="#projects"
+							to="#projects"
 						>
 							Mes projets
 						</Link>
